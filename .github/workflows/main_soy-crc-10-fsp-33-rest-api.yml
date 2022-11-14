@@ -11,7 +11,7 @@ on:
 
 runs:
   using: 'node16'
-  main: 'main.js'
+  main: 'serverApp.js'
 
 jobs:
   build:
