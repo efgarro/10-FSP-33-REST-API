@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "soy-crc.com Rest API",
   "main": "serverApp.js",
-  "scripts": {
-    "start": "npx nodemon serverApp.js"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
