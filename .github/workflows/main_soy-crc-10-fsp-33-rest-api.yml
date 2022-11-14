@@ -16,13 +16,18 @@ runs:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
 
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
+<<<<<<< HEAD
           node-version: "16.x"
+=======
+          node-version: '16.x'
+>>>>>>> 6b90a8e1c32537a7f41847e11755ffe5d6e4b7f0
 
       - name: npm install, build, and test
         run: |
@@ -40,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: "Production"
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -49,11 +54,11 @@ jobs:
         with:
           name: node-app
 
-      - name: "Deploy to Azure Web App"
+      - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "soy-crc-10-fsp-33-rest-api"
-          slot-name: "Production"
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E5457876B55A4021AAF02F50A86A91F5 }}
+          app-name: 'soy-crc-10-fsp-33-rest-api'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BFBF6811F6BD4FD0B6EEDC2D645574B7 }}
           package: .
