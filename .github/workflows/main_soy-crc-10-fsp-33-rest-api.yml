@@ -9,12 +9,13 @@ on:
       - main
   workflow_dispatch:
 
+runs:
+  using: "node16"
+  main: "serverApp.js"
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    runs:
-      using: "node16"
-      main: "serverApp.js"
     steps:
       - uses: actions/checkout@v2
 
