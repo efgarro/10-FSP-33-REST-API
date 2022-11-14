@@ -23,11 +23,7 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-<<<<<<< HEAD
-          node-version: "16.x"
-=======
           node-version: '16.x'
->>>>>>> 6b90a8e1c32537a7f41847e11755ffe5d6e4b7f0
 
       - name: npm install, build, and test
         run: |
