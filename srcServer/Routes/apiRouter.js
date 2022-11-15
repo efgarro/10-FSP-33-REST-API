@@ -1,5 +1,5 @@
 const express = require("express");
-const usersRouter = require("./usersRouter");
+const usersRouter = require("./users.routes");
 // const ideasRouter = require("./ideas");
 // const meetingsRouter = require("./meetings");
 const apiRouter = express.Router();
