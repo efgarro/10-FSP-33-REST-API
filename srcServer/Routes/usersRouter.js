@@ -1,9 +1,11 @@
 const express = require("express");
+const { getUsers } = require("../Controllers/usersController");
 const usersRouter = express.Router();
-// const { getUsers } = require("../Controllers/usersController");
+
+
+usersRouter.get("/", getUsers);
+// usersRouter.get("/", (req, res) => {
+//   res.send("Message without DB");
+// });
 
 module.exports = usersRouter;
-
-usersRouter.get("/", (req,res) => {
-    res.send('Message without DB')
-});

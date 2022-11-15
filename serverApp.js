@@ -26,9 +26,9 @@ const PORT = process.env.PORT || 4000;
 //     });
 
 // Mount your existing apiRouter below at the '/api' path.
-serverApp.use("/api", apiRouter);
 
 serverApp.get("/", (req, res) => res.send("Hellow Bella!"));
+serverApp.use("/api", apiRouter);
 
 // This conditional is here for testing purposes:
 if (!module.parent) {
