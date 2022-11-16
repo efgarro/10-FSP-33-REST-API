@@ -1,7 +1,7 @@
 const express = require("express");
 const serverApp = express();
 // const cors = require("cors");
-const apiRouter = require("./srcServer/Routes/apiRouter");
+// const apiRouter = require("./srcServer/Routes/apiRouter");
 
 /* Do not change the following line! It is required for testing and allowing
  *  the frontend application to interact as planned with the api server
@@ -28,7 +28,26 @@ const PORT = process.env.PORT || 4000;
 // Mount your existing apiRouter below at the '/api' path.
 
 serverApp.get("/", (req, res) => res.send("Hellow Bella!"));
-serverApp.use("/api", apiRouter);
+// serverApp.use("/api", apiRouter);
+
+const { Client } = require("pg");
+
+const client = new Client({
+  host: "soy-crc-db-server.postgres.database.azure.com",
+  port: 5432,
+  database: "crc-store",
+  user: "efgarro",
+  password: "Due427ga",
+  ssl: true,
+});
+
+client.connect();
+
+serverApp.get("/users", async (req, res) => {
+  const response = await client.query("SELECT * FROM crc_users LIMIT 5");
+  console.log(response.rows);
+  res.send("Connected to DBase");
+});
 
 // This conditional is here for testing purposes:
 if (!module.parent) {

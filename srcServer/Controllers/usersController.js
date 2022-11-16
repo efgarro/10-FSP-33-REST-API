@@ -6,11 +6,10 @@ const client = new Client({
   database: "crc-store",
   user: "efgarro",
   password: "Due427ga",
-  ssl: true
+  ssl: true,
 });
 
 client.connect();
-
 
 const getUsers = async (req, res) => {
   const response = await client.query("SELECT * FROM crc_users LIMIT 5");
