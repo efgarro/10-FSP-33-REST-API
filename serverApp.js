@@ -30,24 +30,24 @@ const PORT = process.env.PORT || 4000;
 serverApp.get("/", (req, res) => res.send("Hellow Bella!"));
 // serverApp.use("/api", apiRouter);
 
-// const { Client } = require("pg");
+const { Client } = require("pg");
 
-// const client = new Client({
-//   host: "soy-crc-db-server.postgres.database.azure.com",
-//   port: 5432,
-//   database: "crc-store",
-//   user: "efgarro",
-//   password: "Due427ga",
-//   ssl: { rejectUnauthorized: false },
-// });
+const client = new Client({
+  host: "soy-crc-db-server.postgres.database.azure.com",
+  port: 5432,
+  database: "crc-store",
+  user: "efgarro",
+  password: "Due427ga",
+  ssl: true,
+});
 
-// client.connect();
+client.connect();
 
-// serverApp.get("/users", async (req, res) => {
-//   const response = await client.query("SELECT * FROM crc_users LIMIT 5");
-//   console.log(response.rows);
-//   res.send("Connected to DBase");
-// });
+serverApp.get("/users", async (req, res) => {
+  const response = await client.query("SELECT * FROM crc_users LIMIT 5");
+  console.log(response.rows);
+  res.send("Connected to DBase");
+});
 
 // This conditional is here for testing purposes:
 if (!module.parent) {
