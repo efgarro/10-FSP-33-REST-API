@@ -38,7 +38,7 @@ const client = new Client({
   database: "crc-store",
   user: "efgarro",
   password: "Due427ga",
-  ssl: true,
+  ssl: { rejectUnauthorized: false },
 });
 
 client.connect();
