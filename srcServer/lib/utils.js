@@ -19,7 +19,7 @@ const PRIV_KEY = fs.readFileSync(pathToKey, 'utf8');
  * This function uses the crypto library to decrypt the hash using the salt and then compares
  * the decrypted hash/salt with the password that the user provided at login
  */
-function validPassword(password, hash, salt) {
+function validatePassword(password, hash, salt) {
     var hashVerify = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
     return hash === hashVerify;
 }
@@ -66,6 +66,5 @@ function issueJWT(user) {
   }
 }
 
-module.exports.validPassword = validPassword;
-module.exports.genPassword = genPassword;
-module.exports.issueJWT = issueJWT;
+
+module.exports = { validatePassword, genPassword, issueJWT };

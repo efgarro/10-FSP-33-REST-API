@@ -5,6 +5,7 @@ const mongoClient = require("./dbClient");
 const User = mongoClient.models.User;
 const passportLocal = require("passport-local");
 const passportJWT = require("passport-jwt");
+const { validatePassword } = require("../lib/utils");
 
 const LocalStrategy = passportLocal.Strategy;
 const JWTStrategy = passportJWT.Strategy;

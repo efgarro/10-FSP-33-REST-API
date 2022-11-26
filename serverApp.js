@@ -27,7 +27,7 @@ serverApp.use(express.json());
 serverApp.use(express.urlencoded({ extended: false }));
 // Allows our Angular application to make HTTP requests to Express application
 
-serverApp.get("/", (req, res) => res.send("Hellow Bella!"));
+
 serverApp.use("/", authRouter);
 serverApp.use("/api", apiRouter);
 
