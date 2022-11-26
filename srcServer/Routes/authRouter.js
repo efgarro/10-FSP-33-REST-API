@@ -1,23 +1,17 @@
 const express = require("express");
 const passport = require("passport");
-const { getUsers } = require("../Controllers/usersController");
-const usersRouter = express.Router();
+// const { getUsers } = require("../Controllers/usersController");
+const authRouter = express.Router();
 
-const connection = require("../Config/dbClient");
-const User = connection.models.User;
+const mongoClient = require("../Config/dbClient");
+const User = mongoClient.models.User;
 const utils = require("../lib/utils");
 
-usersRouter.get("/", getUsers);
+// authRouter.get("/", getUsers);
 
-usersRouter.get(
-  "/protected",
-  passport.authenticate("jwt", { session: false }),
-  (req, res, next) => {
-    res.send("Hellow Bella");
-  }
-);
 
-usersRouter.post("/login", function (req, res, next) {
+
+authRouter.post("/login", function (req, res, next) {
   User.findOne({ username: req.body.username })
     .then((user) => {
       if (!user) {
@@ -53,7 +47,7 @@ usersRouter.post("/login", function (req, res, next) {
 });
 
 // TODO
-usersRouter.post("/register", function (req, res, next) {
+authRouter.post("/register", function (req, res, next) {
   console.log(req.body);
   const saltHash = utils.genPassword(req.body.password);
 
@@ -81,4 +75,4 @@ usersRouter.post("/register", function (req, res, next) {
   }
 });
 
-module.exports = usersRouter;
+module.exports = authRouter;

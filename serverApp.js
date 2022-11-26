@@ -1,6 +1,7 @@
 const express = require("express");
 const serverApp = express();
 // const cors = require("cors");
+const authRouter = require("./srcServer/Routes/authRouter");
 const apiRouter = require("./srcServer/Routes/apiRouter");
 const passport = require("passport");
 
@@ -13,7 +14,7 @@ require("dotenv").config();
 require("./srcServer/Config/dbClient");
 
 // Pass the global passport object into the configuration function
-require("./srcServer/Config/passportStrat");
+require("./srcServer/Config/passportStrats");
 
 // This will initialize the passport object on every request
 serverApp.use(passport.initialize());
@@ -27,6 +28,7 @@ serverApp.use(express.urlencoded({ extended: false }));
 // Allows our Angular application to make HTTP requests to Express application
 
 serverApp.get("/", (req, res) => res.send("Hellow Bella!"));
+serverApp.use("/", authRouter);
 serverApp.use("/api", apiRouter);
 
 serverApp.listen(PORT, () => {
