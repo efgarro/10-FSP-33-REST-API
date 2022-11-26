@@ -1,2 +1,4 @@
 99-References
 node_modules
+.env
+id_rsa_priv.pem
