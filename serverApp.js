@@ -11,7 +11,7 @@ const passport = require("passport");
 const PORT = process.env.PORT || 4000;
 
 require("dotenv").config();
-require("./srcServer/Config/dbClient");
+require("./srcServer/Config/mongoClient");
 
 // Pass the global passport object into the configuration function
 require("./srcServer/Config/passportStrats");
@@ -26,7 +26,6 @@ serverApp.use(passport.initialize());
 serverApp.use(express.json());
 serverApp.use(express.urlencoded({ extended: false }));
 // Allows our Angular application to make HTTP requests to Express application
-
 
 serverApp.use("/", authRouter);
 serverApp.use("/api", apiRouter);

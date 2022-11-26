@@ -1,7 +1,7 @@
 const passport = require("passport");
 const fs = require("fs");
 const path = require("path");
-const mongoClient = require("./dbClient");
+const mongoClient = require("./mongoClient");
 const User = mongoClient.models.User;
 const passportLocal = require("passport-local");
 const passportJWT = require("passport-jwt");
@@ -19,8 +19,8 @@ const customFields = {
   password: "password",
 };
 
-const localVerifyCB = (username, password, done) => {
-  User.findOne({ username: username })
+const localVerifyCB = (email, password, done) => {
+  User.findOne({ email: email })
     .then((user) => {
       if (!user) {
         return done(null, false);

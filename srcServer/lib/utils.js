@@ -34,7 +34,7 @@ function validatePassword(password, hash, salt) {
  * ALTERNATIVE: It would also be acceptable to just use a hashing algorithm to make a hash of the plain text password.
  * You would then store the hashed password in the database and then re-hash it to verify later (similar to what we do here)
  */
-function genPassword(password) {
+function generatePassword(password) {
     var salt = crypto.randomBytes(32).toString('hex');
     var genHash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
     
@@ -67,4 +67,4 @@ function issueJWT(user) {
 }
 
 
-module.exports = { validatePassword, genPassword, issueJWT };
+module.exports = { validatePassword, generatePassword, issueJWT };
