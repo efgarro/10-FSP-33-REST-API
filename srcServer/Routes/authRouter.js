@@ -1,12 +1,24 @@
 const express = require("express");
 const passport = require("passport");
 const authRouter = express.Router();
-const { registerUser } = require("../Controllers/authController");
+const { registerUser, getUsersPG, getUsersPGLHost } = require("../Controllers/authController");
 const { issueJWT } = require("../lib/utils");
 
-// authRouter.get("/", getUsers);
+authRouter.get(
+  "/users",
+  passport.authenticate("jwt", { session: false }),
+  getUsersPG
+);
+authRouter.get(
+  "/userslhost",
+  getUsersPGLHost
+);
 
-authRouter.get("/", (req, res) => res.send("Hellow Bella!"));
+authRouter.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => res.send("Authenticated Hellow Bella!")
+);
 
 authRouter.post(
   "/login",

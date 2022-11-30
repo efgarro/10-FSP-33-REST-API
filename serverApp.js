@@ -11,8 +11,8 @@ const passport = require("passport");
 const PORT = process.env.PORT || 4000;
 
 require("dotenv").config();
-require("./srcServer/Config/mongoClient");
 
+// require("./srcServer/Config/mongoClient")
 // Pass the global passport object into the configuration function
 require("./srcServer/Config/passportStrats");
 
