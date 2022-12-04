@@ -34,8 +34,7 @@ authRouter.get(
 
 authRouter.get(
   "/",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => res.send("Authenticated Hellow Bella!")
+  (req, res) => res.send("Hellow Bella!")
 );
 
 authRouter.post(
