@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/efgarro/10-FSP-33-REST-API#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",

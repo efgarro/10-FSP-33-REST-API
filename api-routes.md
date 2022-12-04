@@ -7,6 +7,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis varius eros 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis varius eros ac rutrum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse eleifend risus in ante dapibus ultricies. Sed vestibulum felis id ipsum feugiat lobortis. Pellentesque tellus libero, malesuada nec tortor quis, egestas pulvinar lorem. Etiam malesuada auctor augue, cursus molestie ligula suscipit sit amet. Pellentesque eget posuere arcu. Praesent sit amet erat laoreet tellus gravida tincidunt.  
 <br>
 ```
+
+/api/login
+/api/register
+
 /api/
 /api/users
 /api/user/:id
@@ -19,19 +23,19 @@ api/hubs
 
 Waterfalls
 /api/:region/:hub/waterfalls
-/api/:region/:hub/waterfalls/:id
+/api/:region/:hub/waterfalls/:wtf_id
 
 Hiking Trails
 /api/:region/:hub/trails
-/api/:region/:hub/trails/:id
+/api/:region/:hub/trails/:trs_id
 
 Lodging
 /api/:region/:hub/hotels
-/api/:region/:hub/hotels/:id
+/api/:region/:hub/hotels/:ldg_id
 
 Restaurants
 /api/:region/:hub/restaurants
-/api/:region/:hub/restaurants/:id
+/api/:region/:hub/restaurants/:rest_id
 
 Tours
 /api/tours

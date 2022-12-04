@@ -5,7 +5,7 @@ const pgClientPassword = process.env.PG_PWD;
 const pgClient = new Client({
   host: "soy-crc-db-server.postgres.database.azure.com",
   port: 5432,
-  database: "crc-store",
+  database: "scr-db-v2022b",
   user: "efgarro",
   password: pgClientPassword,
   ssl: true,

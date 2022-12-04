@@ -1,8 +1,12 @@
 const express = require("express");
 const passport = require("passport");
 const authRouter = express.Router();
-const { registerUser, getUsersPG, getUsersPGLHost } = require("../Controllers/authController");
+const { registerUser, getUsersPG, getCountriesPG, newUserPGLHost, getUsersPGLHost, getCountriesPGLHost } = require("../Controllers/authController");
 const { issueJWT } = require("../lib/utils");
+
+authRouter.param("user_id", (req, res, next, id) => {
+
+})
 
 authRouter.get(
   "/users",
@@ -10,8 +14,22 @@ authRouter.get(
   getUsersPG
 );
 authRouter.get(
-  "/userslhost",
+  "/countries-az",
+  passport.authenticate("jwt", { session: false }),
+  getCountriesPG
+);
+authRouter.post(
+  "/newuser-lhost",
+  newUserPGLHost
+);
+authRouter.get(
+  "/getusers-lhost",
   getUsersPGLHost
+);
+authRouter.get(
+  "/countries-lhost",
+  passport.authenticate("jwt", { session: false }),
+  getCountriesPGLHost
 );
 
 authRouter.get(

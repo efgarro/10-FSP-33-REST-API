@@ -1,6 +1,6 @@
 const express = require("express");
 const serverApp = express();
-// const cors = require("cors");
+const cors = require("cors");
 const authRouter = require("./srcServer/Routes/authRouter");
 const apiRouter = require("./srcServer/Routes/apiRouter");
 const passport = require("passport");
@@ -20,7 +20,7 @@ require("./srcServer/Config/passportStrats");
 serverApp.use(passport.initialize());
 
 // Add middleware for handling CORS requests from index.html
-// serverApp.use(cors());
+serverApp.use(cors());
 
 // Add middware for parsing request bodies here:
 serverApp.use(express.json());
