@@ -5,13 +5,18 @@ const {
   registerUser,
   getUsers,
   getCountries,
-  newUser
+  newUser,
 } = require("../Controllers/authController");
 const { issueJWT } = require("../lib/utils");
 
 authRouter.param("user_id", (req, res, next, id) => {});
 
 authRouter.get("/", (req, res) => res.send("Hellow Bella!"));
+
+authRouter.get("/always-on", (req, res) => {
+  console.log("always on route");
+  res.json({ message: "Always on!!!... with timer." });
+});
 
 authRouter.get(
   "/users",
