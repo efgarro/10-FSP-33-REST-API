@@ -3,7 +3,7 @@ const { generatePassword } = require("../Utils/utils");
 
 const getCountries = async (req, res) => {
   pgClient
-    .query("SELECT * FROM scr_countries LIMIT 4")
+    .query("SELECT * FROM scr_countries")
     .then(({ rows }) => {
       res.json(rows);
     })
