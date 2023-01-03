@@ -31,6 +31,10 @@ apiRouter.param("place_id", (req, res, next, place_id) => {
   next();
 });
 
+apiRouter.get("/", (req, res) => {
+  res.send("Hellow Bella");
+});
+
 apiRouter.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
