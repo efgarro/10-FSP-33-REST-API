@@ -1,11 +1,11 @@
 const passport = require("passport");
 const fs = require("fs");
 const path = require("path");
-const mongoClient = require("../Config/mongoClient");
-const User = mongoClient.models.User;
+
+const { pgClient } = require("../Config/postgresClient");
 const passportLocal = require("passport-local");
 const passportJWT = require("passport-jwt");
-const { validatePassword } = require("../lib/utils");
+const { validatePassword } = require("../Utils/utils");
 
 const LocalStrategy = passportLocal.Strategy;
 const JWTStrategy = passportJWT.Strategy;
@@ -20,8 +20,13 @@ const customFields = {
 };
 
 const localVerifyCB = (email, password, done) => {
-  User.findOne({ email: email })
-    .then((user) => {
+  pgClient
+    .query(
+      `SELECT user_id, email, hash, salt FROM scr_users WHERE email = $1`,
+      [email]
+    )
+    .then(({ rows }) => {
+      const user = rows[0];
       if (!user) {
         return done(null, false);
       }
@@ -47,10 +52,14 @@ const jwtOptions = {
   algorithms: ["RS256"],
 };
 
-// TODO
 const jwtVerifyCB = (payload, done) => {
-  User.findOne({ _id: payload.sub })
-    .then((user) => {
+  pgClient
+    .query(
+      `SELECT user_id, email, hash, salt FROM scr_users WHERE user_id = $1`,
+      [payload.sub]
+    )
+    .then(({ rows }) => {
+      const user = rows[0];
       if (user) {
         return done(null, user);
       } else {

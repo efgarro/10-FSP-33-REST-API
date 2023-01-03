@@ -28,7 +28,12 @@ serverApp.use(express.urlencoded({ extended: false }));
 // Allows our Angular application to make HTTP requests to Express application
 
 serverApp.use("/", authRouter);
-serverApp.use("/api", apiRouter);
+serverApp.use("/", apiRouter);
+
+serverApp.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 serverApp.listen(PORT, () => {
   console.log(`Listening to port...${PORT}`);

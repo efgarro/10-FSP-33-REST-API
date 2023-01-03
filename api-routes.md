@@ -8,37 +8,59 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis varius eros 
 <br>
 ```
 
-/api/login
-/api/register
+/register
+/login
 
-/api/
-/api/users
-/api/user/:id
+/countries
+/user-roles
+
+/users
+/user/:user_id
 
 Regions
-api/regions
+/regions
+/regions/:region_id
+/regions/:region_id/images
 
 Hubs
-api/hubs
+/hubs
+/hubs/:hub_id
+/hubs/:hub_id/images
+/hubs?region=rerere
+
+Places
+/places/:place_id
+/places/:place_id/images
+/places?hub=ababab&type=tytyty
+/places/
+
 
 Waterfalls
-/api/:region/:hub/waterfalls
-/api/:region/:hub/waterfalls/:wtf_id
+/waterfalls
+/waterfalls/:wfall_id
+/waterfalls/:wfall_id/images
+/waterfalls?region=rerere&hub=ababab
 
 Hiking Trails
-/api/:region/:hub/trails
-/api/:region/:hub/trails/:trs_id
+/trails
+/trails/:trail_id
+/trails/:trail_id/images
+/trails?region=rerere&hub=ababab
 
 Lodging
-/api/:region/:hub/hotels
-/api/:region/:hub/hotels/:ldg_id
+/lodging
+/lodging/:lodge_id
+/lodging/:lodge_id/images
+/lodging?region=rerere&hub=ababab
 
 Restaurants
-/api/:region/:hub/restaurants
-/api/:region/:hub/restaurants/:rest_id
+/restaurants
+/restaurants/:resta_id
+/restaurants/:resta_id/images
+/restaurants?region=rerere&hub=ababab
 
 Tours
-/api/tours
+/tours
 ```
 ***
 <ol>

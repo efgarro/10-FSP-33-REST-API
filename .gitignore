@@ -2,3 +2,6 @@
 node_modules
 .env
 LHost
+pgQueries
+REST Client
+MockData

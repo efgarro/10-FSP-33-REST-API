@@ -1,60 +1,51 @@
-const mongoClient = require("../Config/mongoClient");
-const User = mongoClient.models.User;
+const { json } = require("express");
 const { pgClient } = require("../Config/postgresClient");
-const { generatePassword } = require("../lib/utils");
+const { generatePassword } = require("../Utils/utils");
 
-const getUsers = async (req, res) => {
-  const response = await pgClient.query("SELECT * FROM scr_users LIMIT 5");
-  console.log(response.rows);
-  res.send(response.rows);
-};
+const registerNewUser = async (req, res, next) => {
+  const { first_name, last_name, email, user_role_id, country_id, image_url } =
+    req.body;
 
-const getCountries = async (req, res) => {
-  const response = await pgClient.query("SELECT * FROM scr_countries LIMIT 4");
-  console.log(response.rows);
-  res.send(response.rows);
-};
-
-
-const newUser = async (req, res) => {
-  const { email, hash, salt, user_role_id, country_id, is_active, first_name, last_name, image } = req.body
-  const response = await pgClient.query(
-    "INSERT INTO scr_users (user_id, email, hash, salt, user_role_id, country_id, is_active, first_name, last_name, image) VALUES (uuid_time_nextval(), $1, $2, $3, $4, $5, $6, $7, $8, $9)",
-    [
-      email,
-      hash,
-      salt,
-      user_role_id,
-      country_id,
-      is_active,
-      first_name,
-      last_name,
-      image,
-    ]
-  );
-  console.log(response);
-  res.json(response.rows);
-};
-
-const registerUser = (req, res, next) => {
   const saltHash = generatePassword(req.body.password);
-
   const salt = saltHash.salt;
   const hash = saltHash.hash;
 
-  const newUser = new User({
-    email: req.body.email,
-    hash: hash,
-    salt: salt,
-  });
-
   try {
-    newUser.save().then((user) => {
-      next();
-    });
+    const response = await pgClient.query(
+      `INSERT INTO scr_users (user_id, first_name, last_name, email, hash, salt, user_role_id, country_id,  image_url) VALUES (uuid_time_nextval(), $1, $2, $3, $4, $5, $6, $7, $8)`,
+      [
+        first_name,
+        last_name,
+        email,
+        hash,
+        salt,
+        user_role_id,
+        country_id,
+        image_url,
+      ]
+    );
   } catch (err) {
     res.json({ success: false, msg: err });
   }
+  next();
 };
 
-module.exports = { registerUser, getUsers, getCountries, newUser};
+const findCountryAndUserRoleIds = async (req, res, next) => {
+  const { country_of_origin, user_role } = req.body;
+  const country_res = await pgClient.query(
+    `SELECT country_id FROM scr_countries WHERE country = $1`,
+    [country_of_origin]
+  );
+  const user_role_res = await pgClient.query(
+    `SELECT user_role_id FROM scr_user_roles WHERE user_role = $1`,
+    [user_role]
+  );
+  req.body.country_id = country_res.rows[0].country_id;
+  req.body.user_role_id = user_role_res.rows[0].user_role_id;
+  next();
+};
+
+module.exports = {
+  registerNewUser,
+  findCountryAndUserRoleIds,
+};
